@@ -1,6 +1,6 @@
 {
   "name": "shellish",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A declarative CLI builder for creating command-line interfaces with ease",
   "author": "Yash Kandalkar <yashsk.yk@gmail.com> (https://yashkandalkar.github.io)",
   "license": "MIT",
