@@ -64,6 +64,66 @@ cli.addArgument({
 cli.run();
 ```
 
+## 🔨 Build
+
+Once you've created your CLI, you can build it into a standalone executable using Bun's built-in compiler.
+
+### Basic Build
+
+```bash
+# Build for current platform
+bun build --compile index.ts --outfile my-tool
+```
+
+### Cross-Platform Builds
+
+Build your CLI for different operating systems and architectures:
+
+```bash
+# macOS (Apple Silicon)
+bun build --compile --target bun-darwin-arm64 index.ts --outfile my-tool-macos-arm64
+
+# macOS (Intel)
+bun build --compile --target bun-darwin-x64 index.ts --outfile my-tool-macos-x64
+
+# Linux (x64)
+bun build --compile --target bun-linux-x64 index.ts --outfile my-tool-linux-x64
+
+# Linux (ARM64)
+bun build --compile --target bun-linux-arm64 index.ts --outfile my-tool-linux-arm64
+
+# Windows (x64)
+bun build --compile --target bun-windows-x64 index.ts --outfile my-tool-windows-x64.exe
+```
+
+### Build Script
+
+Add these build commands to your `package.json` for convenience:
+
+```json
+{
+  "scripts": {
+    "build": "bun build --compile index.ts --outfile my-tool",
+    "build:all": "bun run build:macos && bun run build:linux && bun run build:windows",
+    "build:macos": "bun build --compile --target bun-darwin-arm64 index.ts --outfile dist/my-tool-macos-arm64 && bun build --compile --target bun-darwin-x64 index.ts --outfile dist/my-tool-macos-x64",
+    "build:linux": "bun build --compile --target bun-linux-x64 index.ts --outfile dist/my-tool-linux-x64 && bun build --compile --target bun-linux-arm64 index.ts --outfile dist/my-tool-linux-arm64",
+    "build:windows": "bun build --compile --target bun-windows-x64 index.ts --outfile dist/my-tool-windows-x64.exe"
+  }
+}
+```
+
+Then run:
+
+```bash
+# Build for current platform
+bun run build
+
+# Build for all platforms
+bun run build:all
+```
+
+> **Note:** After building, a new executable called `my-tool` (or your specified output name) will be created in your project directory. To access your CLI globally from anywhere in your terminal, add the executable to your system's PATH or move it to a directory that's already in your PATH (like `/usr/local/bin` on macOS/Linux).
+
 ## 📖 Detailed Example
 
 ```typescript
